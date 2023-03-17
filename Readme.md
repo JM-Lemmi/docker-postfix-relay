@@ -1,0 +1,1 @@
+docker run -p 25:25 -e maildomain=student.dhbw-mannheim.de -e smtp_user=s212689:passwort123 --hostname dhbw-relay.test.julian-lemmerich.de ghcr.io/jm-lemmi/postfix-relay-auth
