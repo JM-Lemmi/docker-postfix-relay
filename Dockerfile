@@ -5,7 +5,6 @@ RUN apt update && apt install -y postfix libsasl2-modules sasl2-bin
 ## configure postfix
 RUN postconf -e 'maillog_file=/var/log/mail.log'
 RUN postconf -F '*/*/chroot = n'
-RUN echo "dhbw-relay" > /etc/mailname
 
 ## configure sasl incoming
 # inspired by https://github.com/catatnight/docker-postfix/blob/master/assets/install.sh

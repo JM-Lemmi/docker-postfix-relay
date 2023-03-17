@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Configure Hostname
+echo "$(date +"%b %d %H:%M:%S") $HOSTNAME start.sh[$$]: Configuring Hostname for Postfix"
+echo $HOSTNAME > /etc/mailname
+postconf -e "myhostname=$HOSTNAME"
+
 # Client Auth sasldb2
 echo "$(date +"%b %d %H:%M:%S") $HOSTNAME start.sh[$$]: Creating User Entry in sasldb"
 echo $smtp_pwd | saslpasswd2 -p -c -u $maildomain $smtp_user
