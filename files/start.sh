@@ -12,6 +12,10 @@ chmod 600 /etc/postfix/password
 postmap hash:/etc/postfix/password
 postconf -e "relayhost=[$upstreamserver]:25" 
 
+# Start Anyconnect
+echo "$(date +"%b %d %H:%M:%S") $HOSTNAME start.sh[$$]: Starting Anyconnect"
+echo $vpn_pwd | openconnect --user=$vpn_user --authgroup=$vpn_authgroup --passwd-on-stdin $vpn_server &
+
 # Start Postfix
 postfix start
 echo "$(date +"%b %d %H:%M:%S") $HOSTNAME start.sh[$$]: ➔ Switching to log output from '/var/log/mail.log'"

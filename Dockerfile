@@ -19,6 +19,9 @@ COPY ./files/smtpd.conf /etc/postfix/sasl/smtpd.conf
 ## configure relay
 RUN postconf -e "smtp_sasl_auth_enable = yes" "smtp_sasl_password_maps = hash:/etc/postfix/password" "smtp_sasl_security_options =" "smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination" "mynetworks = 0.0.0.0/0"
 
+## install anyconnect
+RUN apt install -y openconnect
+
 EXPOSE 25
 
 COPY ./files/start.sh /start.sh
