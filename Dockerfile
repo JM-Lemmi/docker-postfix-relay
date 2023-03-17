@@ -13,10 +13,11 @@ RUN echo "dhbw-relay" > /etc/mailname
 # /etc/postfix/main.cf
 RUN postconf -e smtpd_sasl_auth_enable=yes
 RUN postconf -e broken_sasl_auth_clients=yes
-RUN postconf -e smtpd_recipient_restrictions=permit_sasl_authenticated,reject_unauth_destination
 # smtpd.conf
 COPY ./files/smtpd.conf /etc/postfix/sasl/smtpd.conf
 
+## configure relay
+RUN postconf -e "smtp_sasl_auth_enable = yes" "smtp_sasl_password_maps = hash:/etc/postfix/password" "smtp_sasl_security_options =" "smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination" "mynetworks = 0.0.0.0/0"
 
 EXPOSE 25
 
